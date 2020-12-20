@@ -24,7 +24,9 @@ $ composer require log1x/crumb
 
 Publish the breadcrumb configuration file using Acorn:
 
+```sh
 $ wp acorn vendor:publish --provider="Log1x\Crumb\CrumbServiceProvider"
+```
 
 ### Basic Usage
 
