@@ -31,7 +31,7 @@ $ wp acorn vendor:publish --provider="Log1x\Crumb\CrumbServiceProvider"
 ### Basic Usage
 
 ```php
-use Log1x\Crumb\Facade\Crumb;
+use Log1x\Crumb\Facades\Crumb;
 
 return Crumb::build()->toArray();
 ```
