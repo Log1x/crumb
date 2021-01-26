@@ -167,11 +167,10 @@ class Crumb
         }
 
         if (is_singular('post')) {
-            $category = array_shift(
-                get_the_category(get_the_ID())
-            );
+            $categories = get_the_category(get_the_ID());
 
-            if (! empty($category)) {
+            if (! empty($categories)) {
+                $category = array_shift($categories);
                 $this->add(
                     $category->name,
                     get_category_link($category),
