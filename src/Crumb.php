@@ -89,14 +89,14 @@ class Crumb
             if ($ancestors->isNotEmpty()) {
                 $ancestors->each(function ($item) {
                     $this->add(
-                        get_the_title($item),
+                        $this->getPostTitle($item),
                         get_permalink($item)
                     );
                 });
             }
 
             return $this->add(
-                get_the_title()
+                $this->getPostTitle()
             );
         }
 
@@ -178,12 +178,12 @@ class Crumb
                 );
 
                 return $this->add(
-                    get_the_title()
+                    $this->getPostTitle()
                 );
             }
 
             return $this->add(
-                get_the_title(),
+                $this->getPostTitle(),
                 true
             );
         }
@@ -200,7 +200,19 @@ class Crumb
         }
 
         return $this->add(
-            get_the_title()
+            $this->getPostTitle()
         );
+    }
+
+    /**
+     * Get the post title.
+     *
+     * @uses   get_the_title()
+     * @param  int|WP_Post $post
+     * @return string
+     */
+    private function getPostTitle($post = 0)
+    {
+        return apply_filters('log1x/crumb_label', get_the_title($post), $post);
     }
 }
