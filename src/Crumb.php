@@ -162,7 +162,7 @@ class Crumb
 
         if (is_404()) {
             return $this->add(
-                $this->config['404']
+                $this->config['not_found']
             );
         }
 

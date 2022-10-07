@@ -62,7 +62,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 404
+    | Not Found
     |--------------------------------------------------------------------------
     |
     | This option controls the label used when displaying the 404 error page
@@ -70,5 +70,5 @@ return [
     |
     */
 
-    '404' => __('Page not found', 'sage'),
+    'not_found' => __('Page not found', 'sage'),
 ];
