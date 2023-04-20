@@ -63,7 +63,7 @@ class Crumb
      */
     public function build()
     {
-        if (is_front_page()) {
+        if (is_front_page() || is_404()) {
             return $this->breadcrumb;
         }
 
