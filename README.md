@@ -1,7 +1,7 @@
 # Crumb
 
 ![Latest Stable Version](https://img.shields.io/packagist/v/log1x/crumb?style=flat-square)
-![Build Status](https://img.shields.io/github/workflow/status/log1x/crumb/Main)
+![Build Status](https://img.shields.io/github/actions/workflow/status/log1x/crumb/main.yml?branch=master&style=flat-square)
 ![Total Downloads](https://img.shields.io/packagist/dt/log1x/crumb?style=flat-square)
 
 A simple breadcrumb package for Sage 10.
