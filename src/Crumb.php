@@ -31,10 +31,11 @@ class Crumb
      *
      * @param  string $key
      * @param  string $value
+     * @param  int    $id
      * @param  bool   $blog
      * @return $this
      */
-    protected function add($key, $value = null, $blog = false)
+    protected function add($key, $value = null, $id = null, $blog = false)
     {
         if (
             ($value === true && empty($blog) || $blog === true) &&
@@ -49,6 +50,7 @@ class Crumb
         }
 
         $this->breadcrumb->push([
+            'id' => $id,
             'label' => $key,
             'url' => $value,
         ]);
@@ -90,26 +92,37 @@ class Crumb
                 $ancestors->each(function ($item) {
                     $this->add(
                         get_the_title($item),
-                        get_permalink($item)
+                        get_permalink($item),
+                        $item->ID
                     );
                 });
             }
 
             return $this->add(
-                get_the_title()
+                get_the_title(),
+                null,
+                get_the_ID()
             );
         }
 
         if (is_category()) {
+            $category = single_cat_title('', false);
+
             return $this->add(
-                single_cat_title('', false),
+                $category,
+                null,
+                get_cat_ID($category),
                 true
             );
         }
 
         if (is_tag()) {
+            $tag = single_tag_title('', false);
+
             return $this->add(
-                single_tag_title('', false),
+                $tag,
+                null,
+                get_term_by('title', $tag, 'post_tag')->term_id,
                 true
             );
         }
@@ -136,8 +149,12 @@ class Crumb
         }
 
         if (is_tax()) {
+            $term = single_term_title('', false);
+
             return $this->add(
-                single_term_title('', false)
+                $term,
+                null,
+                get_term_by('title', $term, get_query_var('taxonomy'))->term_id
             );
         }
 
@@ -150,6 +167,8 @@ class Crumb
         if (is_author()) {
             return $this->add(
                 sprintf($this->config['author'], get_the_author()),
+                null,
+                get_the_author_meta('ID'),
                 true
             );
         }
@@ -171,19 +190,25 @@ class Crumb
 
             if (! empty($categories)) {
                 $category = array_shift($categories);
+
                 $this->add(
                     $category->name,
                     get_category_link($category),
+                    $category->term_id,
                     true
                 );
 
                 return $this->add(
-                    get_the_title()
+                    get_the_title(),
+                    null,
+                    get_the_ID()
                 );
             }
 
             return $this->add(
                 get_the_title(),
+                null,
+                get_the_ID(),
                 true
             );
         }
@@ -195,12 +220,15 @@ class Crumb
         if (! empty($type)) {
             $this->add(
                 $type->label,
-                get_post_type_archive_link($type->name)
+                get_post_type_archive_link($type->name),
+                $type->ID
             );
         }
 
         return $this->add(
-            get_the_title()
+            get_the_title(),
+            null,
+            get_the_ID()
         );
     }
 }
