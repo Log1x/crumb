@@ -189,14 +189,14 @@ class Crumb
             $categories = get_the_category(get_the_ID());
 
             if (! empty($categories)) {
-                $category = array_shift($categories);
-
-                $this->add(
-                    $category->name,
-                    get_category_link($category),
-                    $category->term_id,
-                    true
-                );
+                foreach ($categories as $index => $category) {
+                    $this->add(
+                        $category->name,
+                        get_category_link($category),
+                        $category->term_id,
+                        $index === 0
+                    );
+                }
 
                 return $this->add(
                     get_the_title(),
