@@ -38,14 +38,15 @@ class Crumb
     protected function add($key, $value = null, $id = null, $blog = false)
     {
         if (
-            ($value === true && empty($blog) || $blog === true) &&
+            $blog === true &&
             get_option('show_on_front') === 'page' &&
             ! empty($blog = get_option('page_for_posts')) &&
             ! empty($this->config['blog'])
         ) {
             $this->add(
                 $this->config['blog'],
-                get_permalink($blog)
+                get_permalink($blog),
+                $blog
             );
         }
 
@@ -131,6 +132,8 @@ class Crumb
             if (is_month()) {
                 return $this->add(
                     get_the_date('F Y'),
+                    null,
+                    null,
                     true
                 );
             }
@@ -138,12 +141,16 @@ class Crumb
             if (is_year()) {
                 return $this->add(
                     get_the_date('Y'),
+                    null,
+                    null,
                     true
                 );
             }
 
             return $this->add(
                 get_the_date(),
+                null,
+                null,
                 true
             );
         }
