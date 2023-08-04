@@ -94,7 +94,7 @@ class Crumb
                     $this->add(
                         get_the_title($item),
                         get_permalink($item),
-                        $item->ID
+                        $item
                     );
                 });
             }
