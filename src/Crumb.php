@@ -123,7 +123,7 @@ class Crumb
             return $this->add(
                 $tag,
                 null,
-                get_term_by('title', $tag, 'post_tag')->term_id,
+                get_term_by('name', $tag, 'post_tag')->term_id,
                 true
             );
         }
@@ -161,7 +161,7 @@ class Crumb
             return $this->add(
                 $term,
                 null,
-                get_term_by('title', $term, get_query_var('taxonomy'))->term_id
+                get_term_by('name', $term, get_query_var('taxonomy'))->term_id
             );
         }
 
