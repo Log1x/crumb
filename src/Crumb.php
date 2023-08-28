@@ -228,7 +228,7 @@ class Crumb
             $this->add(
                 $type->label,
                 get_post_type_archive_link($type->name),
-                $type->ID
+                get_queried_object_id()
             );
         }
 
