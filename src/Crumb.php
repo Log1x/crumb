@@ -8,6 +8,13 @@ use Illuminate\Support\Arr;
 class Crumb
 {
     /**
+     * The breadcrumb configuration.
+     *
+     * @var array
+     */
+    protected $config = [];
+
+    /**
      * The breadcrumb items.
      *
      * @var \Illuminate\Support\Collection
