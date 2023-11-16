@@ -2,7 +2,7 @@
 
 namespace Log1x\Crumb;
 
-use Roots\Acorn\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class CrumbServiceProvider extends ServiceProvider
 {
